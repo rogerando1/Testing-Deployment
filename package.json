@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "App.js",
   "scripts": {
     "install-server": "cd Backend && npm install",
-    "start-server": "cd Backend && node index.js",
+    "start-server": "cd Backend && node App.js",
     "install-client": "cd frontend && npm install",
     "build-client": "cd frontend && npm run build",
     "start-client": "cd frontend && npm run start"
