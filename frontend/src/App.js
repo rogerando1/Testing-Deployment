@@ -18,8 +18,16 @@ import{TeacherProfile} from './Components/TeacherProfile/TeacherProfile';
 import{TeacherAddCourse} from './Components/TeacherAddCourse/AddCourse';
 import{TeacherViewCourse} from './Components/TeacherViewCourse/TeacherViewCourse';
 import{StudentViewCourse} from './Components/StudentViewCourse/StudentViewCourse';
+import { useEffect, useState } from "react";
 
 function App() {
+
+  useEffect(() => {
+    fetch("https://course-certification1-0.onrender.com")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message));
+  }, []);
+
   return (
     <>
     <Router>
