@@ -6,6 +6,10 @@ const user_TeacherModel = require('./models/user_Teacher')
 const teacher_AddCourseModel = require ('./models/teacher_Addcourse')
 require('dotenv/config')
 
+const corsOptions = {
+    origin: "https://courses-mwpt.onrender.com/" // frontend URI (ReactJS)
+}
+
 const app = express()
 app.use(express.json())
 app.use(cors())
