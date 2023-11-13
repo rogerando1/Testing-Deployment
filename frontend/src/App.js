@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 function App() {
 
   useEffect(() => {
-    fetch("https://course-certification1-0.onrender.com")
+    fetch("http://localhost:3002")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   }, []);
