@@ -22,8 +22,10 @@ import { useEffect, useState } from "react";
 
 function App() {
 
+  const [Message, setMessage] = useState([])
+
   useEffect(() => {
-    fetch("http://localhost:3002")
+    fetch("https://localhost:3002")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   }, []);
