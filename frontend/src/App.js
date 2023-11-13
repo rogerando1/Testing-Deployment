@@ -25,7 +25,7 @@ function App() {
   const [Message, setMessage] = useState([])
 
   useEffect(() => {
-    fetch("https://localhost:3002")
+    fetch("https://course-certification1-0.onrender.com/")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   }, []);
