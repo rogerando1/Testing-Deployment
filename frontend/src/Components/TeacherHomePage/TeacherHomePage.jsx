@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './TeacherHomePage.css'
 import { useNavigate } from 'react-router-dom';
 import Button from "@mui/material/Button";
@@ -19,7 +19,7 @@ export const TeacherHomePage = () =>
   const [successMessage, setSuccessMessage] = useState('');
   const [titleValid, setTitleValid] = useState(true); // Track the validity of the title input
   const [descriptionValid, setDescriptionValid] = useState(true);// Track the validity of the description input
-
+  const [search, setSearch] = useState('');
 
   const handleSubmit = async (e) => {
       e.preventDefault();
@@ -76,14 +76,27 @@ export const TeacherHomePage = () =>
     setOpen(false);
   };
   const navigate = useNavigate();
-  return(
+  //jwt
+    axios.defaults.withCredentials = true;
+    useEffect(()=> {
+      axios.get('http://localhost:3002/teacherhomepage')
+      .then(result => {console.log(result)
+          if(result.data !== "Success")
+          {
+              navigate('/loginsignup')
+          }
+      })
+      .catch(err=> console.log(err))
+    }, [])
+  //jwt
+    return(
       <div className='teacherhomepage'>
        <nav className='navHomepage'>
           <div class ="app-logo1">
             <img src = "logo.png" alt= "Cour-Cert" height={160} width={100}></img>
           </div>
           <div class = "searchBar1">
-            <input type = "text" id="search-input" placeholder="Search here"></input>
+            <input type = "text" id="search-input" placeholder="Search here" onChange={event=>{setSearch(event.target.value)}}></input>
             <button id="search-button">Search</button>
           </div>
           <div class ="nav-links1">

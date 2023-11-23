@@ -27,6 +27,8 @@ export const LoginSignup = () => {
   const [password, setPassword] = useState()
   const navigate = useNavigate();
 
+
+  axios.defaults.withCredentials = true;
   const handleSubmit = (e) => {
     e.preventDefault()
     if (userType === "student"){
@@ -142,7 +144,7 @@ export const LoginSignup = () => {
       </div>
 
       {action === "Login" ? (
-          <div className="forgot-password"><span> Forgot Password?</span></div>
+          <div className="forgot-password"><a href='./forgotpassword'> Forgot Password?</a></div>
         ) : null}
       <div className="create-account">
       <p>Don't have an account yet? Create account as <a href='./teachersignup'>Teacher</a> or <a href='./studentsignup'>Student</a>.</p>

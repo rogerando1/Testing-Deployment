@@ -9,8 +9,18 @@
     text-align: left;
 }
 
-.title1{
-    margin-top:1vh;
+ .title1{
+    border: 1px solid rgb(224, 223, 223);
+    background-color: rgb(224, 223, 223);
+    border-radius: 5px;
+    margin-top: 1vh;
+    height: 5vh;
+    font-size: 23px;
+    padding: 9px;
+    text-indent: 5px;
+    color: black;
+
+    /* margin-top:1vh;
     margin-left: 2vh;
     width: 40vh;
     height: 5vh;
@@ -18,30 +28,17 @@
     font-size: 25px;
     padding: 8px;
     border-radius: 5px;
-    color: black;
+    color: black; */
 }
-.title1:hover{
-    background-color:rgb(211, 208, 208);
-}
-
-
 .title1 a:link {
     text-decoration: none;
     color: black;
 }
-  
 .title1 a:visited {
     text-decoration: none;
     color: black;
-}
-  
-.title1 a:hover {
-    text-decoration: none;
-    color: black;
-}
-  
+} 
 .title1 a:active {
     text-decoration: none;
     color: black;
  }
-

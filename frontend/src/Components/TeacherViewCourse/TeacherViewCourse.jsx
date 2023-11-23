@@ -37,7 +37,7 @@ export const TeacherViewCourse = () =>
 
         <div className='detail'> 
             <div>
-                List of courses
+                Course Handle
             </div>
             {courses.map(course => {
                 return <div className='title1'>

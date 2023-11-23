@@ -150,10 +150,6 @@ font-size: 18px;
 margin-bottom: 50px;
 }
 
-.forgot-password span{
-color: #4500a6;
-cursor: pointer;
-}
 
 .create-account{
   display: flex;
@@ -176,4 +172,109 @@ margin-bottom: 50px;
 .create-account p a{
   color: default;
   
+}
+/* Forgot Password */
+.forgot-password span{
+  color: #4500a6;
+  cursor: pointer;
+  }
+.FPtext {
+  color: #9d3c00;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.FPunderline{
+  margin-bottom: 30px;
+  width: 600px;
+  height: 2px;
+  /* height: 6px; */
+  /* background: #9d3c00; */
+  background: #eaeaea;
+  border-radius: 9px;
+}
+.messagebelowforgotpassword{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #0000009e;
+  font-size: 18px;
+  margin-bottom: 30px;
+  margin-right: 30px;
+  margin-left: 60px;
+}
+.FPbuttons {
+  display: flex;
+  gap: 10px;
+  margin: auto;
+  }
+.btn-success {
+  background: #9d3c00;
+  color: #ffffff; 
+  border: none; 
+  border-radius: 8px; 
+  padding: 12px 24px;
+  font-size: 19px;
+  transition: background-color 0.3s ease; 
+  cursor: pointer;
+}
+.btn-cancel {
+  background: #eaeaea;
+  color: #000000b0; 
+  border: none; 
+  border-radius: 6px; 
+  padding: 12px 24px;
+  font-size: 19px;
+  cursor: pointer;
+  margin-left: 150px;
+}
+
+
+.btn-success:hover {
+  background: red;
+}
+
+.FPheader{
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.FPtext {
+  color: #9d3c00;
+  font-size: 40px;
+  font-weight: 700;
+  margin-left: 60px;
+}
+
+/* Reset Password */
+.messagebelowresetpassword{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #0000009e;
+  font-size: 18px;
+  margin-bottom: 30px;
+  margin-right: 60px;
+  margin-left: 60px;
+}
+
+.btn-RSTsuccess {
+  background: #9d3c00;
+  color: #ffffff; 
+  border: none; 
+  border-radius: 8px; 
+  padding: 12px 24px;
+  font-size: 19px;
+  transition: background-color 0.3s ease; 
+  cursor: pointer;
+  margin: auto;
+  margin-bottom: 50px;
+   width: 480px; /*optional */
+}
+
+.btn-RSTsuccess:hover {
+  background: red;
 }
