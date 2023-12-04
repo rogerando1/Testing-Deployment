@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './TeacherSignup.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
@@ -168,7 +168,7 @@ export function TeacherSignup()
           </div>
           <div className='hrefs'>
             <p>
-              Already have an account? <a href='/loginsignup'>Login</a>
+              Already have an account? <Link to='/loginsignup'>Login</Link>
             </p>
             </div>
             </form>

@@ -75,6 +75,14 @@
     display: flex;
 }
 
+/* Add this to your existing CSS file or create a new one */
+.weekly-tile {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    /* Add more styling as needed */
+  }
+  
 .Forms ::placeholder{
     font-size: 3vh;
 }
@@ -118,7 +126,7 @@
     ;
 }
 
-.callname{
+.PdfFilename{
     border: 1px solid rgb(133, 131, 131);
     margin-left: 5vh;
     height: 4vh;

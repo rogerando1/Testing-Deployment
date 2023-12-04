@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './TeacherHomePage.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -9,6 +9,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import axios from 'axios'
+import { useUserDataAtom } from '../../hooks/user_data_atom';
 
 export const TeacherHomePage = () => 
 {
@@ -17,9 +18,25 @@ export const TeacherHomePage = () =>
   const [course_description, setCourseDescription] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchButtonClicked, setSearchButtonClicked] = useState(false);
+  const [initialRequestComplete, setInitialRequestComplete] = useState(false);
   const [titleValid, setTitleValid] = useState(true); // Track the validity of the title input
   const [descriptionValid, setDescriptionValid] = useState(true);// Track the validity of the description input
+  const [userData, setUserData] = useUserDataAtom();
+  const navigate = useNavigate();
+
+  // AUTHENTICATION
+
+  console.log("data: " + userData._id);
+  
+  
   const [search, setSearch] = useState('');
+
+  const handleSignout = () => {
+    navigate('/login');
+  };
 
   const handleSubmit = async (e) => {
       e.preventDefault();
@@ -41,18 +58,20 @@ export const TeacherHomePage = () =>
 
     
       try {
+        const { _id } = userData
+
         //backend website for database storing
         const response = await axios.post('http://localhost:3002/teacher_AddCourse', {
           course_title,
           course_description,
+          user_id: _id
         });
-    
-        console.log(response.data);
     
         // Check if the response contains an error message
         if (response.data === 'Course already added') {
           setErrorMessage('Course already added');
         } else {
+          // setUserData(response.data)
            // Successful registration
           setSuccessMessage('Add Course Success!');
           setErrorMessage(''); // Clear any existing error message            
@@ -75,8 +94,6 @@ export const TeacherHomePage = () =>
   const handleClose = () => {
     setOpen(false);
   };
-  const navigate = useNavigate();
-  //jwt
     axios.defaults.withCredentials = true;
     useEffect(()=> {
       axios.get('http://localhost:3002/teacherhomepage')
@@ -87,8 +104,29 @@ export const TeacherHomePage = () =>
           }
       })
       .catch(err=> console.log(err))
-    }, [])
-  //jwt
+      .finally(() => {
+        setInitialRequestComplete(true);
+      });
+  }, []);
+  
+  const handleSearch = () => {
+    axios
+      .get(`http://localhost:3002/searchcourse?query=${searchQuery}`)
+      .then((result) => {
+        console.log(result);
+        setSearchResults(result.data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setSearchButtonClicked(true);
+      })
+  };
+
+  if (!initialRequestComplete) {
+    // Initial request still in progress
+    return null; // or loading indicator if needed
+  }
+
     return(
       <div className='teacherhomepage'>
        <nav className='navHomepage'>
@@ -96,14 +134,43 @@ export const TeacherHomePage = () =>
             <img src = "logo.png" alt= "Cour-Cert" height={160} width={100}></img>
           </div>
           <div class = "searchBar1">
-            <input type = "text" id="search-input" placeholder="Search here" onChange={event=>{setSearch(event.target.value)}}></input>
-            <button id="search-button">Search</button>
-          </div>
+            <input type = "text" 
+            id="search-input" 
+            placeholder="Search here" 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            ></input>
+           <button id="search-button" onClick={handleSearch}>
+            Search
+          </button>
+        </div>
+        {searchResults !== null && searchResults.length > 0 ? (
+  <div className="search-results">
+    <h2>Search Results:</h2>
+    <ul>
+      {searchResults.map((course) => (
+        <li key={course.id}>
+          <Link to={`/course/${course.id}`}>{course.course_title}</Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+) : (
+  searchButtonClicked && searchResults.length === 0 && (
+    <div className="no-results-found">
+      <p>No results found</p>
+    </div>
+  )
+)}
           <div class ="nav-links1">
             <ul>
-              <li><a href = "./teacherviewcourse"> View Course</a> </li>
-              <li><a href = "./teacherprofile"> Account Profile</a> </li>
-              <li><a href = "./"> Signout</a> </li>
+              <li><Link to = "/teacherviewcourse"> View Course</Link> </li>
+              <li><Link to = "/teacherprofile"> Account Profile</Link> </li>
+              <li>
+              <Link to="/" onClick={handleSignout}>
+                Signout
+              </Link>
+              </li>
              </ul>
            </div>
        </nav>
@@ -162,4 +229,3 @@ export const TeacherHomePage = () =>
      </div>           
   );
 }
-

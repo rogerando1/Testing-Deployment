@@ -1,77 +1,172 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import './AddCourse.css';
-import { useNavigate } from 'react-router-dom';
-import { Textarea } from 'theme-ui'
-import { NoSsr } from '@mui/material';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useUserDataAtom } from '../../hooks/user_data_atom';
+import { Textarea } from 'theme-ui';
+import axios from 'axios';
 
-export const TeacherAddCourse = () => 
-{
+export const TeacherAddCourse = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialTitle = queryParams.get('title');
+  const initialDescription = queryParams.get('description');
+  const [courseTitle, setCourseTitle] = useState(initialTitle);
+  const [courseDescription, setCourseDescription] = useState(initialDescription);
+  const id = queryParams.get('id');
+  const [userData, setUserData] = useUserDataAtom();
+  const [week, setWeek] = useState('');
+  const [pdfTitle, setPdfTitle] = useState('');
+  const [pdfFile, setPdfFile] = useState('');
+  const [uploadSuccess, setUploadSuccess] = useState(false);
   const navigate = useNavigate();
-  return(
-    <div className='addcoursecontainer'>
-        <nav className='first-nav'>
-            <div class ="first-nav-logo">
-                <img src = "Logo1.1.png" alt= "Cour-Cert"></img>
-            </div>
-            <div className='first-nav-title'>
-                <p className='p1'> Course-Certification</p>
-                <div className='first-nav-title1'>
-                <p className='p2'> "Empowering Your Learning Journey"</p>
-                </div>
-            </div>
-        </nav>
-        <nav className='second-nav'>
-        <div class ="second-nav-links">
-            <ul>
-              <li><a href = "./teacherviewcourse"> View Course</a> </li>
-              <li><a href = "./teacherprofile"> Account Profile</a> </li>
-              <li><a href = "./teacherviewcourse"> Back</a> </li>
-             </ul>
-           </div>
-        </nav>
-        <div className='details'>
-            <div className='title'>
-                <input 
-                    type='text'
-                    id='title' 
-                    placeholder='Your Title'>
-                </input>
-            </div>
-            <div className='description'>
-            <Textarea placeholder='Course Description' />
-                {/* <input 
-                    type='text'
-                     id='title' 
-                    placeholder='Course Description'>
-                </input> */}
-            </div>
+  console.log("data ID from view course: " + id);
 
+    //jwt
+    axios.defaults.withCredentials = true;
+    useEffect(() => {
+      axios
+        .get("http://localhost:3002/teacheraddcourse")
+        .then((result) => {
+          console.log(result);
+          
+        console.log("Token: " +result.data);
+          if (result.data !== "Success") {
+            navigate("/loginsignup");
+          }
+        })
+        .catch((err) => console.log(err));
+    }, []);
+  //
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!pdfFile) {
+      // If pdfFile is empty, show an error message
+      alert("Please upload a file");
+      return;
+    }
+  
+    const WeeklyData = {
+      id,
+      weekNumber: week,
+      file: pdfFile,
+      PDFdescription: pdfTitle,
+    };
+  
+    try {
+      const weeklytopic = await axios.post("http://localhost:3002/AddFiles", WeeklyData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log(weeklytopic);
+      setUploadSuccess(true);
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      // Handle error if needed
+    }
+  };
+  
+
+  const handleSaveChanges = async (e) => {
+    e.preventDefault();
+
+    const courseData = {
+      id,
+      course_title: courseTitle,
+      course_title: courseTitle,
+      course_description: courseDescription,
+    };
+
+    console.log(courseTitle, courseDescription,id);
+    const data = await axios.put("http://localhost:3002/updateCourse", courseData);
+    console.log(data);
+  };
+
+  return (
+    <div className="addcoursecontainer">
+      <nav className='first-nav'>
+        <div className="first-nav-logo">
+          <img src="Logo1.1.png" alt="Cour-Cert"></img>
         </div>
-        <div className='addcourse-row'>
-            <div className='addcourse-col'>
-                <div className='Forms'>
-                
-                    <input className='form-input1'
-                        type='text' 
-                        id='topicnumber' 
-                        placeholder='Week #'>
-                    </input>
-                </div>
-                <div className='addfile'>
-                    <div className='callname'> Name of the file after adding the file
-                    </div>
-                    <div className='inputfile'>
-                        <input 
-                             type='file' id='filename'>
-                        </input>
-                    </div>
-                </div>
-            </div>
-            <div className='butts'>
-                <button className='add' type='add' > + Add new tile
-                </button>
-            </div>
+        <div className='first-nav-title'>
+          <p className='p1'> Course-Certification</p>
+          <div className='first-nav-title1'>
+            <p className='p2'> "Empowering Your Learning Journey"</p>
+          </div>
         </div>
+      </nav>
+      <nav className='second-nav'>
+        <div className="second-nav-links">
+          <ul>
+            <li><Link to="/teacherviewcourse"> View Course</Link > </li>
+            <li><Link to="/teacherprofile"> Account Profile</Link > </li>
+            <li><Link to="/teacherviewcourse"> Back</Link > </li>
+          </ul>
+        </div>
+      </nav>
+      <form encType="multipart/form-data">
+        <div className="details">
+          <div className="title">
+            <input
+              type="text"
+              id="title"
+              placeholder="Your Title"
+              value={courseTitle}
+              onChange={(e) => setCourseTitle(e.target.value)}
+            />
+          </div>
+          <div className="description">
+            <Textarea
+              placeholder="Course Description"
+              value={courseDescription}
+              onChange={(e) => setCourseDescription(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="addcourse-row">
+          <div className="addcourse-col">
+            <div className="Forms">
+              <input
+                className="form-input1"
+                type="text"
+                id="topicnumber"
+                placeholder="Week #"
+                value={week}
+                onChange={(e) => setWeek(e.target.value)}
+              />
+              <input
+                type="text"
+                className="PdfFilename"
+                placeholder="Title of the file"
+                value={pdfTitle}
+                onChange={(e) => setPdfTitle(e.target.value)}
+              />
+              <div className="inputfile">
+                <input
+                  type="file"
+                  name="pdfFile"
+                  accept=".pdf"
+                  onChange={(e) => setPdfFile(e.target.files[0])}
+                />
+              </div>
+            </div>
+            <button type="submit" onClick={handleSubmit}>
+              Upload File
+            </button>
+            {uploadSuccess && <p style={{ color: 'green' }}>Upload successful!</p>}
+          </div>
+        </div>
+        {uploadSuccess && (
+          <div className="success-message">
+            File upload successful!
+          </div>
+        )}
+        <div className="butts">
+          <button type="submit" onClick={handleSaveChanges}>
+            Save Changes
+          </button>
+        </div>
+      </form>
     </div>
-  )
-}
+  );
+};

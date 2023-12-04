@@ -16,7 +16,7 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
 }
 
-.header{
+.headerad{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +25,7 @@
   margin-top: 30px;
 }
 
-.text {
+.textLogin {
   color: #9d3c00;
   font-size: 48px;
   font-weight: 700;

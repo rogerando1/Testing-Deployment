@@ -41,7 +41,12 @@ export function ResetPassword() {
                     navigate('/loginsignup');
                   }, 2000);
             } else {
-                 navigate('/resetpassword')
+              setErrorMessage('Password Reset Link Expired.');
+              setTimeout(() => {
+                window.opener = null;
+                window.open("", "_self");
+                window.close();
+              }, 5000);
             }
         }).catch(err => console.log(err))
     }}

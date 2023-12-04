@@ -14,7 +14,23 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
+nav .navTeacherHomepage{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 0 30px;
+  background-color: rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+  width: 95%;
+  height: 80px;
+  border-radius: 100px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%);
+  color: #fff;
+}
 .app-logo1{
   flex-basis: 10%;
   flex: 1;
@@ -23,10 +39,12 @@
 
 .app-logo1 img{
   width: 150px;
+  height: auto;
 }
 
 .nav-links1{
-  flex: 1;
+  display: flex;
+  gap: 10px;
   text-align: right;
   margin: 0 10px;
 }
@@ -42,9 +60,19 @@
   text-decoration: none;
 }
 
+.nav-link2 ul li a:hover{
+  padding: 7px;
+  border-radius: 5px;
+  background: rgba(80, 80, 238);
+  color: #fff;
+  text-decoration: none;
+}
+
 .searchBar{
   flex: 1;
   display: flex;
+  flex-direction: column; /* Display child elements in a column */
+  margin: 0 10px;
 }
 
 #search-input{
@@ -91,4 +119,48 @@
 Dialog{
   height: 20vh;
   width: 20vh;
+}
+
+
+.search-results {
+  margin-top: 180px;
+  color: #fff;
+}
+
+.search-results h2 {
+  font-size: 12px;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.search-results li {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.search-results li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.search-results li a:hover {
+  padding: 7px;
+  border-radius: 5px;
+  background: rgba(80, 80, 238);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Styles for No Results Found */
+.no-results-found {
+  text-align: justify;
+  margin-top: 100px;
+  color: white;
+}
+
+.no-results-found p {
+  font-size: 12px;
 }

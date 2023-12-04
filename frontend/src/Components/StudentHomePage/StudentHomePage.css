@@ -44,11 +44,13 @@ nav .navStudentHomepage{
   height: auto;
 }
 
-.searchBar1{
+.searchBar1 {
   flex: 1;
   display: flex;
+  flex-direction: column; /* Display child elements in a column */
   margin: 0 10px;
 }
+
 
 #search-input1{
   flex: 1;
@@ -57,6 +59,7 @@ nav .navStudentHomepage{
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   outline: none;
+  
 }
 
 #search-button1{
@@ -99,31 +102,82 @@ nav .navStudentHomepage{
   text-decoration: none;
 }
 
-div .addcoursebutton{
+.addcourse-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10vh; /* Adjust the top margin for spacing */
+}
+
+.addcoursebutton {
   border-radius: 10px;
   background-color: white;
   height: 20vh;
   width: 40vh;
-  margin-top: 10vh;
-  margin-left: 50vh;
+  margin-top: 200px;
+  margin-left: 100px;
+
 }
 
 .addcoursebutton button{
-margin-left: 13vh;
-margin-top: 2.5vh;
-border-radius: 50%;
-height: 15vh;
-width: 15vh;
-background-image: url(addlogo.png);
-background-size: 15vh, 15vh;
-background-repeat: no-repeat;
-border-radius: 50%;
-cursor: pointer;
-}
+  margin-left: 13vh;
+  margin-top: 2.5vh;
+  border-radius: 50%;
+  height: 15vh;
+  width: 15vh;
+  background-image: url(addlogo.png);
+  background-size: 15vh, 15vh;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  cursor: pointer;
+  }
 
 .addcoursebutton button:hover {
-border-radius: 50%;
-background-image: url(addlogo2.png);
-background-size: 15vh, 15vh;
-background-repeat: no-repeat;
+  border-radius: 50%;
+  background-image: url(addlogo2.png);
+  background-size: 15vh 15vh;
+  background-repeat: no-repeat;
+}
+
+.search-results {
+  margin-top: 180px;
+  color: #fff;
+}
+
+.search-results h2 {
+  font-size: 12px;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.search-results li {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.search-results li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.search-results li a:hover {
+  padding: 7px;
+  border-radius: 5px;
+  background: rgba(80, 80, 238);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Styles for No Results Found */
+.no-results-found {
+  text-align: justify;
+  margin-top: 100px;
+  color: white;
+}
+
+.no-results-found p {
+  font-size: 12px;
 }

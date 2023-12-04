@@ -1,0 +1,123 @@
+.coursetitle{
+    height: 1vh;
+    width: 90vh;
+    text-indent: 0.5vh;
+    margin-top: 6vh;
+    margin-left: 22.5%;
+    padding: 11px;
+    font-size: 30px;
+}
+/* box1 */
+.coursedescriptions p{
+    padding: 10px;
+    width: 90vh;
+    min-height: 23vh;
+    margin-top: 6vh;
+    margin-left: 25%;
+    text-indent: 2vh;
+    margin-bottom: 3vh;
+    border: 1px solid black;
+}
+/* box2 */
+.cotainerss{
+    border: 1px solid black;
+    margin-top: 3vh;
+    margin-left: 25%;
+    margin-bottom: 3vh;
+    width: 90vh;
+    height: auto;
+}
+
+.containerss .weeknumbers{
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.containerss .weeklyfiles{
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* //quiz */
+
+/* box3 */
+.courseQuiz {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 90vh;
+    min-height: 50vh; /* Use min-height instead of height */
+    margin-top: 3vh auto; /* Adjust margin-top as needed */
+    margin-left: 25%;
+    text-indent: 2vh;
+    border: 1px solid black;
+
+    
+    /* background: rgb(247,249,250); */
+    /* padding-bottom: 30px; */
+    /* border: 1px solid rgb(247,249,250);  */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    background-color: #f7f9fa;
+
+  }
+
+  .choices-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .choices-list li {
+    margin-top: 15px;
+    margin-bottom: 15px; /* Adjust as needed for spacing between choices */
+    
+  }
+
+  .choices-list label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .choices-list input {
+    margin-right: 5px;
+  }
+  
+  .QuizTitle {
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  
+  .QuizTitle h2 {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .QuizTitle::after {
+    content: ''; /* Empty content */
+    display: block;
+    width: 100%; /* Line spans the entire width of .courseQuiz */
+    height: 2px; /* Line thickness */
+    background-color: #333; /* Line color */
+    margin-top: 10px; /* Adjust as needed for spacing between QuizTitle and underline */
+  }
+
+  /* Add these styles to your existing CSS */
+
+.Quiz_submit-button {
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+  padding: 10px 20px; /* Padding for better readability */
+  font-size: 1em; /* Adjust font size */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Add some border radius for a rounded look */
+  cursor: pointer; /* Change cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+.Quiz_submit-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}

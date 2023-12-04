@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import React, { useEffect,useState } from 'react';
 import axios from 'axios'
 import './StudentAddCourse.css';
@@ -8,40 +8,9 @@ export const StudentAddCourse = () =>
 {
     const [search, setSearch] = useState('');
     const [courses, getCourses] = useState([]);
-  const [enrolled_course, setEnrolledCourse] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-     try {
-        //backend website for database storing
-        const response = await axios.post('http://localhost:3002/student_AddCourse', {
-          enrolled_course,
-        });
-    
-        console.log(response.data);
-    
-        // Check if the response contains an error message
-        if (response.data === 'Course already added') {
-          setErrorMessage('Course already added');
-        } else {
-           // Successful registration
-          setSuccessMessage('Add Course Success!');
-          setErrorMessage(''); // Clear any existing error message            
-          // Redirect to view course after a delay
-           setTimeout(() => {
-            navigate('/studentviewcourse');
-          }, 2000); // Adjust the delay as needed
-        }
-      } catch (error) {
-        console.error(error);
-        // Handle other errors if needed
-        setErrorMessage('An error occurred. Please try again.');
-  }};
 
     useEffect( ()=>{
-        axios.get('http://localhost:3002/getTeachercourses')
+        axios.get('http://localhost:3002/getStudentcourses')
         .then(courses => getCourses(courses.data))
         .catch( err => console.log(err))
     },[])
@@ -51,9 +20,9 @@ export const StudentAddCourse = () =>
         <div className='addcoursecontainer1'>
         <nav className='first-nav1'>
             <div class ="first-nav-logo1">
-            <a href='/studenthomepage'>
+            <Link to='/studenthomepage'>
                      <img src = "Logo1.1.png" alt=    "Cour-Cert"></img>
-                </a>
+                </Link>
          </div>
             <div className='first-nav-title1'>
                 <p className='p1'> Course-Certification</p>
@@ -72,7 +41,7 @@ export const StudentAddCourse = () =>
     </div>
     <div class ="second-nav-links2">
         <ul>
-          <li><a href = "/studenthomepage"> Back</a> </li>
+          <li><Link to = "/studenthomepage"> Back</Link> </li>
          </ul>
        </div>
     </nav>
@@ -82,24 +51,24 @@ export const StudentAddCourse = () =>
     </div>
     <div className='details1'> 
         {courses.map(course => {
-            return <div className='course-box'>
+            return (<div className='course-box'>
                 <div className='titles1'>
-                    <a href='courseviewpage'>
+                    <Link to='courseviewpage'>
                         {course.course_title}
-                    </a>  
+                    </Link>  
                 </div>
                 <div className='Courses'>
                     <div className='description1'>
                         <p>{course.course_description}</p>
                     </div>
                     <div className='enrollcourse'>
-                        <button type='submit' onClick={handleSubmit}>
+                        <button type='submit' onClick={() => navigate('/mycourse')}>
                             Enroll Course
                         </button>
                     </div>
                 </div>                    
             </div>
-            })
+        )})
         }
     </div>
     <div className='space'>

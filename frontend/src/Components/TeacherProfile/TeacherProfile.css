@@ -175,7 +175,16 @@ h1{
     background: rgb(0, 105, 217);
 }
 
-
+.dropdown-toggle {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px; /* Space between button and dropdown */
+    margin-top: 20px;
+    margin-left: 40px;
+  }
 /* .col-7{
     margin-top: 22vh;
     place-content: center;
